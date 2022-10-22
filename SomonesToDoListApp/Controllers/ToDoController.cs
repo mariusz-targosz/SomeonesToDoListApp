@@ -7,7 +7,7 @@ using NLog;
 
 namespace SomeonesToDoListApp.Controllers
 {
-	[RoutePrefix("ToDo")]
+	[RoutePrefix("api/todos")]
 	public class ToDoController : ApiController
 	{
 		// Sets up the logger for the current service class
@@ -36,7 +36,7 @@ namespace SomeonesToDoListApp.Controllers
 		/// <param name="toDo"></param>
 		/// <returns></returns>
 		[HttpPost]
-		[Route("CreateToDo")]
+		[Route]
 		public async Task<IHttpActionResult> CreateToDo([FromBody] ToDoViewModel toDo)
 		{
 			try
@@ -54,7 +54,7 @@ namespace SomeonesToDoListApp.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
-		[Route("GetToDos")]
+		[Route]
 		public async Task<IHttpActionResult> GetToDos()
 		{
 			try
