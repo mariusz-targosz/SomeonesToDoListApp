@@ -29,15 +29,8 @@ namespace SomeonesToDoListApp.DataAccessLayer.Migrations
         {
             if (someonesToDoListContext.ToDos.Any()) return;
 
-            var toDo = new ToDo
-            {
-                Id = 1,
-                ToDoItem = "Feed my dog"
-            };
-
+            var toDo = new ToDo(Guid.NewGuid(), "Feed my dog", string.Empty, DateTime.UtcNow, Guid.NewGuid());
             someonesToDoListContext.ToDos.AddOrUpdate(toDo);
-
         }
-
     }
 }
