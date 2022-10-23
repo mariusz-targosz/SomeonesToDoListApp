@@ -3,6 +3,7 @@ using System;
 using SomeonesToDoListApp.DataAccessLayer.Context;
 using SomeonesToDoListApp.Services;
 using Unity;
+using Unity.Lifetime;
 
 namespace SomeonesToDoListApp
 {
@@ -44,8 +45,8 @@ namespace SomeonesToDoListApp
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IToDoService, ToDoService>();
-            container.RegisterType<SomeonesToDoListContext>();
+            container.RegisterType<IToDoService, ToDoService>(new HierarchicalLifetimeManager());
+            container.RegisterType<SomeonesToDoListContext>(new HierarchicalLifetimeManager());
         }
     }
 }
