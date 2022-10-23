@@ -7,8 +7,8 @@
     <ProjectGuid>{3B13ADAB-5628-49C9-BA19-CC642E956727}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AndresToDoListApp.Services</RootNamespace>
-    <AssemblyName>AndresToDoListApp.Services</AssemblyName>
+    <RootNamespace>SomeonesToDoListApp.Services</RootNamespace>
+    <AssemblyName>SomeonesToDoListApp.Services</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

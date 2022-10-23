@@ -7,8 +7,8 @@
     <ProjectGuid>{C754D68E-279C-43CF-B8FD-22399AEF21F0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AndresToDoListApp.DataAccessLayer</RootNamespace>
-    <AssemblyName>AndresToDoListApp.DataAccessLayer</AssemblyName>
+    <RootNamespace>SomeonesToDoListApp.DataAccessLayer</RootNamespace>
+    <AssemblyName>SomeonesToDoListApp.DataAccessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Context\SomeonesToDoListContext.cs" />
     <Compile Include="Entities\ToDo.cs" />
-    <Compile Include="Interfaces\IAndresToDoListContext.cs" />
+    <Compile Include="Interfaces\ISomeonesToDoListContext.cs" />
     <Compile Include="Interfaces\IToDo.cs" />
     <Compile Include="Migrations\201810061608049_CreateToDoList.cs" />
     <Compile Include="Migrations\201810061608049_CreateToDoList.Designer.cs">
