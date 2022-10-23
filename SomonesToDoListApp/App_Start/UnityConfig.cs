@@ -1,6 +1,8 @@
 using SomeonesToDoListApp.Services.Interfaces;
 using System;
+using AutoMapper;
 using SomeonesToDoListApp.DataAccessLayer.Context;
+using SomeonesToDoListApp.DataAccessLayer.Interfaces;
 using SomeonesToDoListApp.Services;
 using Unity;
 using Unity.Lifetime;
@@ -45,9 +47,24 @@ namespace SomeonesToDoListApp
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IToDoService, ToDoService>(new HierarchicalLifetimeManager());
             container.RegisterType<SomeonesToDoListContext>(new HierarchicalLifetimeManager());
+
+            container.RegisterType<IToDoService, ToDoService>();
+            container.RegisterType<IToDoRepository, ToDoRepository>();
+            container.RegisterType<IToDoFactory, ToDoFactory>();
+            container.RegisterType<IDateTimeProvider, DateTimeProvider>();
+
             container.RegisterType(typeof(ILogger<>), typeof(NLogger<>));
+            container.RegisterInstance(InitializeMapper());
+        }
+
+        private static IMapper InitializeMapper()
+        {
+            var autoMapperConfiguration = new MapperConfiguration(expression =>
+            {
+                expression.AddProfile<ToDoMappingProfile>();
+            });
+            return autoMapperConfiguration.CreateMapper();
         }
     }
 }
