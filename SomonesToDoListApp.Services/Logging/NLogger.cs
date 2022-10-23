@@ -1,8 +1,7 @@
 ﻿using System;
 using NLog;
-using SomeonesToDoListApp.Services.Interfaces;
 
-namespace SomeonesToDoListApp.Services
+namespace SomeonesToDoListApp.Services.Logging
 {
     public class NLogger<T> : ILogger<T> where T : class
     {

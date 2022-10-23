@@ -1,14 +1,13 @@
-﻿using SomeonesToDoListApp.DataAccessLayer.Entities;
+﻿using AutoMapper;
+using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.Services.ViewModels;
-using AutoMapper;
 
-namespace SomeonesToDoListApp.Services
+namespace SomeonesToDoListApp.Services.Mappers
 {
     public class AutoMapperConfiguration
     {
         public static void Initialize()
         {
-            // Initializing the AutoMapper configuration for the to do mappings
             Mapper.Initialize((cfg) =>
             {
                 cfg.AddProfile<ToDoMappingProfile>();
@@ -18,7 +17,6 @@ namespace SomeonesToDoListApp.Services
     
     public class ToDoMappingProfile : Profile
     {
-        
         public ToDoMappingProfile()
         {
             CreateMap<ToDo, ToDoViewModel>();

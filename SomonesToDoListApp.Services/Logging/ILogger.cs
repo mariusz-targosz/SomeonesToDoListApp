@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SomeonesToDoListApp.Services.Interfaces
+namespace SomeonesToDoListApp.Services.Logging
 {
     public interface ILogger<T> where T : class
     {

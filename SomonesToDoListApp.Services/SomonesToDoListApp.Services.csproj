@@ -61,11 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapperConfiguration.cs" />
-    <Compile Include="Interfaces\ILogger.cs" />
-    <Compile Include="Interfaces\IToDoService.cs" />
-    <Compile Include="NLogger.cs" />
-    <Compile Include="ToDoService.cs" />
+    <Compile Include="Mappers\AutoMapperConfiguration.cs" />
+    <Compile Include="Services\DateTimeProvider.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\NLogger.cs" />
+    <Compile Include="Services\ToDoFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ToDoViewModel.cs" />
   </ItemGroup>
