@@ -223,10 +223,18 @@
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
+    <Compile Include="Controllers\ToDoListController.cs" />
+    <Compile Include="Controllers\ToDoDeleteController.cs" />
+    <Compile Include="Controllers\ToDoGetController.cs" />
+    <Compile Include="Controllers\ToDoUpdateController.cs" />
+    <Compile Include="Controllers\ToDoAddController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\ToDoAddRequest.cs" />
+    <Compile Include="Requests\ToDoResponse.cs" />
+    <Compile Include="Requests\ToDoUpdateRequest.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

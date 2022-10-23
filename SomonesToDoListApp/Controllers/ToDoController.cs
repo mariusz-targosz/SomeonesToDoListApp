@@ -1,61 +1,22 @@
-﻿using SomeonesToDoListApp.Services.Interfaces;
-using SomeonesToDoListApp.Services.ViewModels;
-using System;
-using System.Threading.Tasks;
-using System.Web.Http;
-using NLog;
+﻿using System.Web.Http;
+using AutoMapper;
+using SomeonesToDoListApp.DataAccessLayer.Repositories;
+using SomeonesToDoListApp.Services.Services;
 
 namespace SomeonesToDoListApp.Controllers
 {
-	[RoutePrefix("api/todos")]
-	public class ToDoController : ApiController
+    [RoutePrefix("api/todos")]
+    public partial class ToDoController : ApiController
 	{
-		// Sets up the logger for the current service class
-		private readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly IToDoFactory _toDoFactory;
+        private readonly IToDoRepository _toDoRepository;
+        private readonly IMapper _mapper;
 
-		// to do service property to be injected into the controller  
-		private IToDoService ToDoService { get; set; }
-
-		public ToDoController(IToDoService toDoService)
-		{
-			ToDoService = toDoService;
+        public ToDoController(IToDoFactory toDoFactory, IToDoRepository toDoRepository, IMapper mapper)
+        {
+            _toDoFactory = toDoFactory;
+            _toDoRepository = toDoRepository;
+            _mapper = mapper;
         }
-
-		/// <summary>
-		/// An HTTP Post request to create a new to do item
-		/// </summary>
-		/// <param name="toDo"></param>
-		/// <returns></returns>
-		[HttpPost]
-		[Route]
-		public async Task<IHttpActionResult> CreateToDo([FromBody] ToDoViewModel toDo)
-		{
-			try
-			{
-				return Ok(await ToDoService.CreateToDoAsync(toDo));
-			}
-			catch (Exception exception)
-			{
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// An HTTP Get request to retrieve all of the to do items
-		/// </summary>
-		/// <returns></returns>
-		[HttpGet]
-		[Route]
-		public async Task<IHttpActionResult> GetToDos()
-		{
-			try
-            {
-                return Ok(await ToDoService.GetToDoItemsAsync());
-            }
-			catch (Exception exception)
-			{
-				throw;
-			}
-		}
     }
 }
