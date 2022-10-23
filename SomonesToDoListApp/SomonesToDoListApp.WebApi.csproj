@@ -231,11 +231,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\ToDoMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\ToDoAddRequest.cs" />
     <Compile Include="Requests\ToDoResponse.cs" />
     <Compile Include="Requests\ToDoUpdateRequest.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ToDoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
