@@ -50,10 +50,7 @@ namespace SomeonesToDoListApp
             container.RegisterType<SomeonesToDoListContext>(new HierarchicalLifetimeManager());
 
             container.RegisterType<IToDoService, ToDoService>();
-            container.RegisterType<IToDoRepository, ToDoRepository>();
-            container.RegisterType<IToDoFactory, ToDoFactory>();
-            container.RegisterType<IDateTimeProvider, DateTimeProvider>();
-
+            
             container.RegisterType(typeof(ILogger<>), typeof(NLogger<>));
             container.RegisterInstance(InitializeMapper());
         }

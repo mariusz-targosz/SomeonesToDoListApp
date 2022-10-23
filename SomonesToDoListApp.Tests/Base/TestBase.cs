@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -49,22 +50,9 @@ namespace SomeonesToDoListApp.Tests.Base
         {
             return new List<ToDo>
             {
-                new ToDo
-                {
-                    Id = 1,
-                    ToDoItem = "Get a new bike"
-                },
-                new ToDo
-                {
-                    Id = 2,
-                    ToDoItem = "Feed my dog"
-                },
-                new ToDo
-                {
-                    Id = 3,
-                    ToDoItem = "Do my homework"
-                }
-
+                new ToDo(Guid.NewGuid(), "Get a new bike", string.Empty, DateTime.UtcNow, Guid.NewGuid()),
+                new ToDo(Guid.NewGuid(), "Feed my dog", string.Empty, DateTime.UtcNow, Guid.NewGuid()),
+                new ToDo(Guid.NewGuid(), "Do my homework", string.Empty, DateTime.UtcNow, Guid.NewGuid())
             }.AsQueryable();
         }
     }

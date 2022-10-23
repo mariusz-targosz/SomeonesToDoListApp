@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
@@ -37,7 +38,7 @@ namespace SomeonesToDoListApp.Tests.Controllers
 
             var newToDo = new ToDoViewModel
             {
-                Id = 4,
+                Id = Guid.NewGuid(),
                 ToDoItem = "Find my lost cat"
             };
 
@@ -61,12 +62,6 @@ namespace SomeonesToDoListApp.Tests.Controllers
             var mockContext = new Mock<SomeonesToDoListContext>();
 
             mockContext.Setup(s => s.ToDos).Returns(mockToDoSet.Object);
-
-            var newToDo = new ToDoViewModel
-            {
-                Id = 4,
-                ToDoItem = "Find my lost cat"
-            };
 
             // act
             var toDoService = new ToDoService(mockContext.Object);

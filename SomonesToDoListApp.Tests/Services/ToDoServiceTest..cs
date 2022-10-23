@@ -1,4 +1,5 @@
-﻿using SomeonesToDoListApp.DataAccessLayer.Context;
+﻿using System;
+using SomeonesToDoListApp.DataAccessLayer.Context;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.Services;
 using SomeonesToDoListApp.Services.ViewModels;
@@ -36,7 +37,7 @@ namespace SomeonesToDoListApp.Tests.Services
 
             var newToDo = new ToDoViewModel
             {
-                Id = 4,
+                Id = Guid.NewGuid(),
                 ToDoItem = "Find my lost cat"
             };
 
@@ -79,7 +80,7 @@ namespace SomeonesToDoListApp.Tests.Services
 
             var updatedToDo = new ToDoViewModel
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 ToDoItem = "Get a new car"
             };
 
@@ -94,7 +95,7 @@ namespace SomeonesToDoListApp.Tests.Services
 
             // assert
             Assert.IsTrue((await mockContext.Object.ToDos.
-                SingleOrDefaultAsync(x => x.Id == updatedToDo.Id))?.ToDoItem == updatedToDo.ToDoItem);
+                SingleOrDefaultAsync(x => x.Id == updatedToDo.Id))?.Title == updatedToDo.ToDoItem);
         }
 
         [TestMethod]
@@ -102,12 +103,6 @@ namespace SomeonesToDoListApp.Tests.Services
         {
             // arrange
             var toDos = GetTestData();
-
-            var deletedToDo = new ToDoViewModel
-            {
-                Id = 1,
-                ToDoItem = "Get a new bike"
-            };
 
             // act
             var mockSet = SetupMockSetAsync(new Mock<DbSet<ToDo>>(), toDos);
