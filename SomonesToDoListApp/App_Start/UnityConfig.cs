@@ -1,9 +1,10 @@
-using SomeonesToDoListApp.Services.Interfaces;
 using System;
 using AutoMapper;
 using SomeonesToDoListApp.DataAccessLayer.Context;
-using SomeonesToDoListApp.DataAccessLayer.Interfaces;
-using SomeonesToDoListApp.Services;
+using SomeonesToDoListApp.DataAccessLayer.Repositories;
+using SomeonesToDoListApp.Services.Logging;
+using SomeonesToDoListApp.Services.Mappers;
+using SomeonesToDoListApp.Services.Services;
 using Unity;
 using Unity.Lifetime;
 
@@ -49,8 +50,10 @@ namespace SomeonesToDoListApp
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<SomeonesToDoListContext>(new HierarchicalLifetimeManager());
 
-            container.RegisterType<IToDoService, ToDoService>();
-            
+            container.RegisterType<IToDoRepository, ToDoRepository>();
+            container.RegisterType<IToDoFactory, ToDoFactory>();
+            container.RegisterType<IDateTimeProvider, DateTimeProvider>();
+
             container.RegisterType(typeof(ILogger<>), typeof(NLogger<>));
             container.RegisterInstance(InitializeMapper());
         }
