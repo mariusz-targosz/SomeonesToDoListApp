@@ -55,6 +55,10 @@
     <Compile Include="Migrations\201810061608049_CreateToDoList.Designer.cs">
       <DependentUpon>201810061608049_CreateToDoList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210231202438_UpdateToDoEntity.cs" />
+    <Compile Include="Migrations\202210231202438_UpdateToDoEntity.designer.cs">
+      <DependentUpon>202210231202438_UpdateToDoEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,6 +69,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810061608049_CreateToDoList.resx">
       <DependentUpon>201810061608049_CreateToDoList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210231202438_UpdateToDoEntity.resx">
+      <DependentUpon>202210231202438_UpdateToDoEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
