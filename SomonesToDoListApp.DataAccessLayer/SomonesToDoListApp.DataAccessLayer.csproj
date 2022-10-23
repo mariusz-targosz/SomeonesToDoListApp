@@ -49,8 +49,7 @@
   <ItemGroup>
     <Compile Include="Context\SomeonesToDoListContext.cs" />
     <Compile Include="Entities\ToDo.cs" />
-    <Compile Include="Interfaces\ISomeonesToDoListContext.cs" />
-    <Compile Include="Interfaces\IToDo.cs" />
+    <Compile Include="Repositories\ToDoRepository.cs" />
     <Compile Include="Migrations\201810061608049_CreateToDoList.cs" />
     <Compile Include="Migrations\201810061608049_CreateToDoList.Designer.cs">
       <DependentUpon>201810061608049_CreateToDoList.cs</DependentUpon>

@@ -1,10 +1,9 @@
 ﻿using SomeonesToDoListApp.DataAccessLayer.Entities;
-using SomeonesToDoListApp.DataAccessLayer.Interfaces;
 using System.Data.Entity;
 
 namespace SomeonesToDoListApp.DataAccessLayer.Context
 {
-	public class SomeonesToDoListContext : DbContext, ISomeonesToDoListContext
+	public class SomeonesToDoListContext : DbContext
 	{
 		public virtual DbSet<ToDo> ToDos { get; set; }
 
