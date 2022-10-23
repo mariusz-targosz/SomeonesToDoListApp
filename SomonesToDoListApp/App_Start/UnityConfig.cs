@@ -47,6 +47,7 @@ namespace SomeonesToDoListApp
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IToDoService, ToDoService>(new HierarchicalLifetimeManager());
             container.RegisterType<SomeonesToDoListContext>(new HierarchicalLifetimeManager());
+            container.RegisterType(typeof(ILogger<>), typeof(NLogger<>));
         }
     }
 }
