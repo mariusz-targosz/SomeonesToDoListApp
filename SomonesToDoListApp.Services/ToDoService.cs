@@ -51,7 +51,7 @@ namespace SomeonesToDoListApp.Services
 			}
 		}
 
-		/// <summary>
+        /// <summary>
 		/// Retrieves a collection of all of the current to do list items asynchronously
 		/// </summary>
 		/// <returns></returns>
@@ -70,12 +70,5 @@ namespace SomeonesToDoListApp.Services
 				throw;
 			}
 		}
-
-		public void Dispose()
-		{
-			// Disposes the service
-			SomeonesToDoListContext?.Dispose();
-		}
-
 	}
 }

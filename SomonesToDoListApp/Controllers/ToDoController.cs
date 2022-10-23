@@ -19,16 +19,7 @@ namespace SomeonesToDoListApp.Controllers
 		public ToDoController(IToDoService toDoService)
 		{
 			ToDoService = toDoService;
-		}
-
-		// Overriding the IDisposable method to dispose of the injected service if disposing is true 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				ToDoService?.Dispose();
-			}
-		}
+        }
 
 		/// <summary>
 		/// An HTTP Post request to create a new to do item
@@ -58,14 +49,13 @@ namespace SomeonesToDoListApp.Controllers
 		public async Task<IHttpActionResult> GetToDos()
 		{
 			try
-			{
-				return Ok(await ToDoService.GetToDoItemsAsync());
-			}
+            {
+                return Ok(await ToDoService.GetToDoItemsAsync());
+            }
 			catch (Exception exception)
 			{
 				throw;
 			}
 		}
-
-	}
+    }
 }
