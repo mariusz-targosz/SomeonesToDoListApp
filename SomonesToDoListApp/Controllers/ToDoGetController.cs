@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using System.Web.Http;
-using SomeonesToDoListApp.ViewModels;
+using SomeonesToDoListApp.Requests;
 
 namespace SomeonesToDoListApp.Controllers
 {
@@ -16,7 +16,7 @@ namespace SomeonesToDoListApp.Controllers
             if (todo == null)
                 return NotFound();
 
-            var toDoViewModel = _mapper.Map<ToDoViewModel>(todo);
+            var toDoViewModel = _mapper.Map<ToDoResponse>(todo);
             return Ok(toDoViewModel);
         }
     }

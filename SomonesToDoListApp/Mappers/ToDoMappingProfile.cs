@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
-using SomeonesToDoListApp.ViewModels;
+using SomeonesToDoListApp.Requests;
 
 namespace SomeonesToDoListApp.Mappers
 {
@@ -8,7 +8,7 @@ namespace SomeonesToDoListApp.Mappers
     {
         public ToDoMappingProfile()
         {
-            CreateMap<ToDo, ToDoViewModel>();
+            CreateMap<ToDo, ToDoResponse>();
         }
     }
 }

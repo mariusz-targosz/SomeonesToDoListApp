@@ -228,6 +228,7 @@
     <Compile Include="Controllers\ToDoGetController.cs" />
     <Compile Include="Controllers\ToDoUpdateController.cs" />
     <Compile Include="Controllers\ToDoAddController.cs" />
+    <Compile Include="Extensions\HttpConfigurationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,7 +238,6 @@
     <Compile Include="Requests\ToDoResponse.cs" />
     <Compile Include="Requests\ToDoUpdateRequest.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ToDoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

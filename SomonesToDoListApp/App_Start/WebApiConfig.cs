@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Configuration;
 using System.Web.Http;
-using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
+using SomeonesToDoListApp.Extensions;
 
 namespace SomeonesToDoListApp
 {
@@ -10,26 +9,17 @@ namespace SomeonesToDoListApp
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-
-            // Web API routes
             config.MapHttpAttributeRoutes();
+            config.SetupJsonFormatter();
 
-            SetupJsonFormatter(config);
+            var frontUrl = ConfigurationManager.AppSettings["FrontUrl"];
+            config.EnableCors(new EnableCorsAttribute(frontUrl, "*", "*"));
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-        }
-
-        private static void SetupJsonFormatter(HttpConfiguration config)
-        {
-            var formatters = config.Formatters;
-            var jsonFormatter = formatters.JsonFormatter;
-            var settings = jsonFormatter.SerializerSettings;
-            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }
