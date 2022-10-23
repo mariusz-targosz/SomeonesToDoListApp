@@ -5,7 +5,7 @@ using SomeonesToDoListApp.Services.Services;
 
 namespace SomeonesToDoListApp.Controllers
 {
-    [RoutePrefix("api/todos")]
+    [RoutePrefix(Routes.ToDoApi)]
     public partial class ToDoController : ApiController
 	{
         private readonly IToDoFactory _toDoFactory;

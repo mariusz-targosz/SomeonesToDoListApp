@@ -11,7 +11,6 @@ namespace SomeonesToDoListApp.Controllers
     {
         [HttpPut]
         [Route("{id}")]
-        [ActionName("Update")]
         public async Task<IHttpActionResult> UpdateAsync([FromUri] Guid id, [FromBody] ToDoUpdateRequest request, CancellationToken cancellationToken)
         {
             var toDo = await _toDoRepository.GetByIdAsync(id, cancellationToken);
@@ -21,7 +20,9 @@ namespace SomeonesToDoListApp.Controllers
                 toDo = _toDoFactory.Create(request.Title, request.Description, Guid.NewGuid());
                 await _toDoRepository.AddAsync(toDo, cancellationToken);
 
-                return CreatedAtRoute(nameof(GetByIdAsync), toDo.Id, toDo);
+                var toDoResponse = _mapper.Map<ToDoResponse>(toDo);
+
+                return Created($"{Routes.ToDoApi}/{toDoResponse.Id}", toDoResponse);
             }
 
             toDo.Update(request.Title, request.Description);

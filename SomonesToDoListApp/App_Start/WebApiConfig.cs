@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using SomeonesToDoListApp.Attributes;
 using SomeonesToDoListApp.Extensions;
 
 namespace SomeonesToDoListApp
@@ -9,6 +10,7 @@ namespace SomeonesToDoListApp
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Filters.Add(new ValidateModelAttribute());
             config.MapHttpAttributeRoutes();
             config.SetupJsonFormatter();
 

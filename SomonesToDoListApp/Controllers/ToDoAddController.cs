@@ -18,7 +18,7 @@ namespace SomeonesToDoListApp.Controllers
 
             var toDoResponse = _mapper.Map<ToDoResponse>(toDo);
 
-            return Created($"api/todos/{toDoResponse.Id}", toDoResponse);
+            return Created($"{Routes.ToDoApi}/{toDoResponse.Id}", toDoResponse);
         }
     }
 }
