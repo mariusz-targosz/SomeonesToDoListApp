@@ -11,6 +11,7 @@ using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
 using SomeonesToDoListApp.Requests;
 using SomeonesToDoListApp.Services.Services;
+using SomeonesToDoListApp.Tests.Fakes;
 using Xunit;
 
 namespace SomeonesToDoListApp.Tests.Controllers
@@ -34,7 +35,7 @@ namespace SomeonesToDoListApp.Tests.Controllers
             toDoFactory.Create(_toDoAddRequest.Title, _toDoAddRequest.Description, Arg.Any<Guid>())
                 .Returns(_toDo);
 
-            _toDoRepository = Substitute.For<IToDoRepository>();
+            _toDoRepository = new ToDoInMemoryRepository();
 
             var mapper = Substitute.For<IMapper>();
             mapper.Map<ToDoResponse>(_toDo)
@@ -63,17 +64,22 @@ namespace SomeonesToDoListApp.Tests.Controllers
         }
 
         [Fact]
-        public async Task AddAsync_WhenCalled_CallsAddAsync()
+        public async Task AddAsync_WhenCalled_AddsToDo()
         {
             // Act
-            var _ = await _sut.AddAsync(_toDoAddRequest, CancellationToken.None);
+            var result = await _sut.AddAsync(_toDoAddRequest, CancellationToken.None);
 
             // Assert
-            await _toDoRepository.Received()
-                .AddAsync(_toDo, Arg.Any<CancellationToken>());
+            var response = result as CreatedNegotiatedContentResult<ToDoResponse>;
+            response.ShouldNotBeNull();
 
-            await _toDoRepository.ReceivedWithAnyArgs()
-                .AddAsync(default, default);
+            var toDoResponse = response.Content;
+
+            var toDo = await _toDoRepository.GetByIdAsync(toDoResponse.Id, CancellationToken.None);
+            toDo.ShouldNotBeNull();
+            toDo.Id.ShouldNotBe(Guid.Empty);
+            toDo.Title.Value.ShouldBe(_toDoAddRequest.Title);
+            toDo.Description.ShouldBe(_toDoAddRequest.Description);
         }
 
         [Fact]

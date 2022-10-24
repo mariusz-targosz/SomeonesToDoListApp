@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Web.Http.Results;
 using Shouldly;
+using SomeonesToDoListApp.Tests.Fakes;
 using Xunit;
 
 namespace SomeonesToDoListApp.Tests.Controllers
@@ -27,7 +28,7 @@ namespace SomeonesToDoListApp.Tests.Controllers
         {
             _toDo = new ToDo(Guid.NewGuid(), new ToDoTitle("Buy milk"), "Remember to buy it twice", DateTime.UtcNow, Guid.NewGuid());
 
-            _toDoRepository = Substitute.For<IToDoRepository>();
+            _toDoRepository = new ToDoInMemoryRepository();
             var toDoFactory = Substitute.For<IToDoFactory>();
             var mapper = Substitute.For<IMapper>();
 
@@ -38,8 +39,7 @@ namespace SomeonesToDoListApp.Tests.Controllers
         public async Task DeleteAsync_ToDoExists_ReturnsNoContent()
         {
             // Arrange
-            _toDoRepository.GetByIdAsync(_toDo.Id, CancellationToken.None)
-                .Returns(_toDo);
+            await _toDoRepository.AddAsync(_toDo, CancellationToken.None);
 
             // Act
             var result = await _sut.DeleteAsync(_toDo.Id, CancellationToken.None);
@@ -50,6 +50,21 @@ namespace SomeonesToDoListApp.Tests.Controllers
             var statusCodeResult = result as StatusCodeResult;
             statusCodeResult.ShouldNotBeNull();
             statusCodeResult.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+        }
+
+
+        [Fact]
+        public async Task DeleteAsync_ToDoExists_RemovesToDo()
+        {
+            // Arrange
+            await _toDoRepository.AddAsync(_toDo, CancellationToken.None);
+
+            // Act
+            var _ = await _sut.DeleteAsync(_toDo.Id, CancellationToken.None);
+
+            // Assert
+            var toDo = await _toDoRepository.GetByIdAsync(_toDo.Id, CancellationToken.None);
+            toDo.ShouldBeNull();
         }
 
         [Fact]
