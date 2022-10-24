@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Web.Http;
 using System.Net;
+using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
 using SomeonesToDoListApp.Requests;
 
 namespace SomeonesToDoListApp.Controllers
@@ -25,7 +26,8 @@ namespace SomeonesToDoListApp.Controllers
                 return Created($"{Routes.ToDoListApi}/{toDoResponse.Id}", toDoResponse);
             }
 
-            toDo.Update(request.Title, request.Description);
+            var title = new ToDoTitle(request.Title);
+            toDo.Update(title, request.Description);
             await _toDoRepository.UpdateAsync(toDo, cancellationToken);
 
             return StatusCode(HttpStatusCode.NoContent);

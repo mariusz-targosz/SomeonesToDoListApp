@@ -75,7 +75,7 @@ namespace SomeonesToDoListApp.Tests.Services
             // Assert
             toDo.ShouldNotBeNull();
             toDo.Id.ShouldNotBe(Guid.Empty);
-            toDo.Title.ShouldBe(Title);
+            toDo.Title.Value.ShouldBe(Title);
             toDo.Description.ShouldBe(Description);
             toDo.CreatedBy.ShouldBe(_createdBy);
             toDo.CreatedAt.ShouldBe(now);
