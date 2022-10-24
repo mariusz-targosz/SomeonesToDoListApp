@@ -11,7 +11,7 @@
             AddColumn("dbo.ToDo", "Title_Value", c => c.String());
             AddColumn("dbo.ToDo", "Description", c => c.String());
             AddColumn("dbo.ToDo", "CreatedAt", c => c.DateTime(nullable: false));
-            AddColumn("dbo.ToDo", "CreatedBy", c => c.Guid(nullable: false));
+            AddColumn("dbo.ToDo", "CreatedBy", c => c.String());
             DropColumn("dbo.ToDo", "Id");
             AddColumn("dbo.ToDo", "Id", c => c.Guid(nullable: false, defaultValue: Guid.NewGuid()));
             AddPrimaryKey("dbo.ToDo", "Id");

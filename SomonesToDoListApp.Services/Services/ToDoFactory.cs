@@ -6,7 +6,7 @@ namespace SomeonesToDoListApp.Services.Services
 {
     public interface IToDoFactory
     {
-        ToDo Create(string title, string description, Guid createdBy);
+        ToDo Create(string title, string description, string createdBy);
     }
 
     public class ToDoFactory : IToDoFactory
@@ -18,9 +18,9 @@ namespace SomeonesToDoListApp.Services.Services
             _dateTimeProvider = dateTimeProvider;
         }
 
-        public ToDo Create(string title, string description, Guid createdBy)
+        public ToDo Create(string title, string description, string createdBy)
         {
-            if (createdBy == Guid.Empty)
+            if (string.IsNullOrWhiteSpace(createdBy))
                 throw new ArgumentNullException(nameof(createdBy), "The created by cannot be empty.");
 
             var todoTitle = new ToDoTitle(title);

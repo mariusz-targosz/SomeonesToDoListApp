@@ -10,6 +10,7 @@ using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
 using SomeonesToDoListApp.Requests;
+using SomeonesToDoListApp.Services;
 using SomeonesToDoListApp.Services.Services;
 using SomeonesToDoListApp.Tests.Fakes;
 using Xunit;
@@ -27,12 +28,13 @@ namespace SomeonesToDoListApp.Tests.Controllers
 
         public ToDoAddControllerTests()
         {
-            _toDo = new ToDo(Guid.NewGuid(), new ToDoTitle("Buy milk"), "Remember to buy it twice", DateTime.UtcNow, Guid.NewGuid());
+            var createdBy = Guid.NewGuid().ToString();
+            _toDo = new ToDo(Guid.NewGuid(), new ToDoTitle("Buy milk"), "Remember to buy it twice", DateTime.UtcNow, Guid.NewGuid().ToString());
             _toDoAddRequest = new ToDoAddRequest(_toDo.Title.ToString(), _toDo.Description);
             var toDoResponse = new ToDoResponse(_toDo.Id, _toDo.Title.ToString(), _toDo.Description);
 
             var toDoFactory = Substitute.For<IToDoFactory>();
-            toDoFactory.Create(_toDoAddRequest.Title, _toDoAddRequest.Description, Arg.Any<Guid>())
+            toDoFactory.Create(_toDoAddRequest.Title, _toDoAddRequest.Description, Arg.Any<string>())
                 .Returns(_toDo);
 
             _toDoRepository = new ToDoInMemoryRepository();
@@ -41,7 +43,10 @@ namespace SomeonesToDoListApp.Tests.Controllers
             mapper.Map<ToDoResponse>(_toDo)
                 .Returns(toDoResponse);
 
-            _sut = new ToDoController(toDoFactory, _toDoRepository, mapper);
+            var currentUserService = Substitute.For<ICurrentUserService>();
+            currentUserService.UserId.Returns(createdBy);
+
+            _sut = new ToDoController(toDoFactory, _toDoRepository, mapper, currentUserService);
         }
 
         [Fact]

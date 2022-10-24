@@ -55,8 +55,7 @@ namespace SomeonesToDoListApp.DataAccessLayer.Repositories
 
             return _someonesToDoListContext.ToDos
                 .AsNoTracking()
-                // TODO: Uncomment
-                //.Where(specification.ToExpression())
+                .Where(specification.ToExpression())
                 .AsEnumerable();
         }
     }

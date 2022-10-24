@@ -11,7 +11,7 @@ namespace SomeonesToDoListApp.Tests.Services
         private const string Title = "Buy a book";
         private const string Description = "Buy a blue book from amazon";
 
-        private readonly Guid _createdBy = Guid.NewGuid();
+        private readonly string _createdBy = Guid.NewGuid().ToString();
 
         private readonly IDateTimeProvider _dateTimeProvider;
 
@@ -38,11 +38,16 @@ namespace SomeonesToDoListApp.Tests.Services
             exception.ShouldNotBeNull();
         }
 
-        [Fact]
-        public void Create_InvalidCreatedBy_ThrowsException()
+        [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("\t")]
+        [InlineData("\r")]
+        [InlineData("\n")]
+        public void Create_InvalidCreatedBy_ThrowsException(string createdBy)
         {
             // Act
-            var exception = Record.Exception(() => _sut.Create(Title, Description, Guid.Empty));
+            var exception = Record.Exception(() => _sut.Create(Title, Description, createdBy));
 
             // Assert
             exception.ShouldNotBeNull();

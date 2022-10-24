@@ -17,8 +17,7 @@ namespace SomeonesToDoListApp.Controllers
             var toDo = await _toDoRepository.GetByIdAsync(id, cancellationToken);
             if (toDo == null)
             {
-                // TODO: Replace CreatedBy
-                toDo = _toDoFactory.Create(request.Title, request.Description, Guid.NewGuid());
+                toDo = _toDoFactory.Create(request.Title, request.Description, _currentUserService.UserId);
                 await _toDoRepository.AddAsync(toDo, cancellationToken);
 
                 var toDoResponse = _mapper.Map<ToDoResponse>(toDo);

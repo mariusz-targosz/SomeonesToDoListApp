@@ -9,13 +9,13 @@ namespace SomeonesToDoListApp.DataAccessLayer.Entities
         public ToDoTitle Title { get; private set; }
         public string Description { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public Guid CreatedBy { get; private set; }
+        public string CreatedBy { get; private set; }
 
         public ToDo()
         {
         }
 
-        public ToDo(Guid id, ToDoTitle title, string description, DateTime createdAt, Guid createdBy)
+        public ToDo(Guid id, ToDoTitle title, string description, DateTime createdAt, string createdBy)
         {
             Id = id;
             Title = title;

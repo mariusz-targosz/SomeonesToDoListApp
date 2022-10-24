@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Threading;
 using System.Web.Http;
 using SomeonesToDoListApp.Requests;
@@ -12,8 +11,7 @@ namespace SomeonesToDoListApp.Controllers
         [Route]
         public async Task<IHttpActionResult> AddAsync([FromBody] ToDoAddRequest request, CancellationToken cancellationToken)
         {
-            // TODO: Replace CreatedBy
-            var toDo = _toDoFactory.Create(request.Title, request.Description, Guid.NewGuid());
+            var toDo = _toDoFactory.Create(request.Title, request.Description, _currentUserService.UserId);
             await _toDoRepository.AddAsync(toDo, cancellationToken);
 
             var toDoResponse = _mapper.Map<ToDoResponse>(toDo);

@@ -6,9 +6,9 @@ namespace SomeonesToDoListApp.DataAccessLayer.Specifications
 {
     public class ToDosCreatedByUserSpecification : Specification<ToDo>
     {
-        private readonly Guid _userId;
+        private readonly string _userId;
 
-        public ToDosCreatedByUserSpecification(Guid userId)
+        public ToDosCreatedByUserSpecification(string userId)
         {
             _userId = userId;
         }

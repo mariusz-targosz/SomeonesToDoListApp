@@ -23,7 +23,7 @@ namespace SomeonesToDoListApp.Tests.Repositories
 
         public ToDoRepositoryTests()
         {
-            _toDo = new ToDo(Guid.NewGuid(), new ToDoTitle("Get a new bike"), string.Empty, DateTime.UtcNow, Guid.NewGuid());
+            _toDo = new ToDo(Guid.NewGuid(), new ToDoTitle("Get a new bike"), string.Empty, DateTime.UtcNow, Guid.NewGuid().ToString());
             _context = new Mock<SomeonesToDoListContext>();
 
             _sut = new ToDoRepository(_context.Object);
