@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SomeonesToDoListApp.DataAccessLayer.Context;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
+using SomeonesToDoListApp.DataAccessLayer.Specifications;
 
 namespace SomeonesToDoListApp.DataAccessLayer.Repositories
 {
@@ -14,7 +15,7 @@ namespace SomeonesToDoListApp.DataAccessLayer.Repositories
         Task UpdateAsync(ToDo toDo, CancellationToken cancellationToken);
         Task DeleteAsync(ToDo toDo, CancellationToken cancellationToken);
         Task<ToDo> GetByIdAsync(Guid id, CancellationToken cancellationToken);
-        Task<IEnumerable<ToDo>> GetAllAsync(Guid userId, CancellationToken cancellationToken);
+        Task<IEnumerable<ToDo>> GetAllAsync(Specification<ToDo> specification, CancellationToken cancellationToken);
     }
 
     public class ToDoRepository : IToDoRepository
@@ -48,12 +49,13 @@ namespace SomeonesToDoListApp.DataAccessLayer.Repositories
             return _someonesToDoListContext.ToDos.FindAsync(cancellationToken, id);
         }
 
-        public async Task<IEnumerable<ToDo>> GetAllAsync(Guid userId, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ToDo>> GetAllAsync(Specification<ToDo> specification, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 
             return _someonesToDoListContext.ToDos
                 .AsNoTracking()
+                .Where(specification.ToExpression())
                 // TODO: Uncomment
                 //.Where(x => x.CreatedBy == userId)
                 .AsEnumerable();
