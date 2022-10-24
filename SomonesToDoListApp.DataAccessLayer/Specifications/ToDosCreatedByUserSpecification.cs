@@ -15,7 +15,7 @@ namespace SomeonesToDoListApp.DataAccessLayer.Specifications
 
         public override Expression<Func<ToDo, bool>> ToExpression()
         {
-            return movie => movie.CreatedBy == _userId;
+            return toDo => toDo.CreatedBy == _userId;
         }
     }
 }
