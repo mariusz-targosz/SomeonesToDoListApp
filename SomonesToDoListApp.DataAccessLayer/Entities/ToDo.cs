@@ -24,7 +24,6 @@ namespace SomeonesToDoListApp.DataAccessLayer.Entities
             CreatedBy = createdBy;
         }
 
-        // TODO: Extract Title into VO
         public void Update(ToDoTitle title, string description)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
