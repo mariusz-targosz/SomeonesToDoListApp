@@ -19,6 +19,8 @@ namespace SomeonesToDoListApp.DataAccessLayer.ValueObjects
             Value = value;
         }
 
+        public override string ToString() => Value;
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
