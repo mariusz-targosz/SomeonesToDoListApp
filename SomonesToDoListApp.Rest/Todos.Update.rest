@@ -1,0 +1,10 @@
+@url = http://localhost:62116/api/todos
+@id = 121c1843-b122-4b63-add5-f779b90054bf
+
+PUT {{url}}/121c1843-b122-4b63-add5-f779b90054bf HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Shopping 2",
+    "description": "Buy a cookies and apple pie and apple"
+}

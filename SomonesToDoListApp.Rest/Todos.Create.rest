@@ -1,0 +1,9 @@
+@url = http://localhost:62116/api/todos
+
+POST {{url}} HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Shopping",
+    "description": "Buy a cookies and apple pie"
+}
