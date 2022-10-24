@@ -4,19 +4,19 @@ using SomeonesToDoListApp.Controllers;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
+using SomeonesToDoListApp.Requests;
 using SomeonesToDoListApp.Services.Services;
+using SomeonesToDoListApp.Tests.Fakes;
 using System;
-using System.Net;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Shouldly;
-using SomeonesToDoListApp.Tests.Fakes;
 using Xunit;
 
 namespace SomeonesToDoListApp.Tests.Controllers
 {
-    public class ToDoDeleteControllerTests
+    public class ToDoGetControllerTests
     {
         private readonly ToDo _toDo;
 
@@ -24,53 +24,48 @@ namespace SomeonesToDoListApp.Tests.Controllers
 
         private readonly ToDoController _sut;
 
-        public ToDoDeleteControllerTests()
+        public ToDoGetControllerTests()
         {
             _toDo = new ToDo(Guid.NewGuid(), new ToDoTitle("Buy milk"), "Remember to buy it twice", DateTime.UtcNow, Guid.NewGuid());
+            var toDoResponse = new ToDoResponse(_toDo.Id, _toDo.Title.ToString(), _toDo.Description);
 
-            _toDoRepository = new ToDoInMemoryRepository();
             var toDoFactory = Substitute.For<IToDoFactory>();
+            _toDoRepository = new ToDoInMemoryRepository();
+
             var mapper = Substitute.For<IMapper>();
+            mapper.Map<ToDoResponse>(_toDo)
+                .Returns(toDoResponse);
 
             _sut = new ToDoController(toDoFactory, _toDoRepository, mapper);
         }
 
         [Fact]
-        public async Task DeleteAsync_ToDoExists_ReturnsNoContent()
+        public async Task GetByIdAsync_ToDoExists_ReturnsToDo()
         {
             // Arrange
             await _toDoRepository.AddAsync(_toDo, CancellationToken.None);
 
             // Act
-            var result = await _sut.DeleteAsync(_toDo.Id, CancellationToken.None);
+            var result = await _sut.GetByIdAsync(_toDo.Id, CancellationToken.None);
 
             // Assert
-            result.ShouldBeOfType<StatusCodeResult>();
+            result.ShouldBeOfType<OkNegotiatedContentResult<ToDoResponse>>();
 
-            var statusCodeResult = result as StatusCodeResult;
-            statusCodeResult.ShouldNotBeNull();
-            statusCodeResult.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+            var response = result as OkNegotiatedContentResult<ToDoResponse>;
+            response.ShouldNotBeNull();
+
+            var toDoResponse = response.Content;
+            toDoResponse.ShouldNotBeNull();
+            toDoResponse.Id.ShouldBe(_toDo.Id);
+            toDoResponse.Title.ShouldBe(_toDo.Title.ToString());
+            toDoResponse.Description.ShouldBe(_toDo.Description);
         }
 
         [Fact]
-        public async Task DeleteAsync_ToDoExists_RemovesToDo()
-        {
-            // Arrange
-            await _toDoRepository.AddAsync(_toDo, CancellationToken.None);
-
-            // Act
-            var _ = await _sut.DeleteAsync(_toDo.Id, CancellationToken.None);
-
-            // Assert
-            var toDo = await _toDoRepository.GetByIdAsync(_toDo.Id, CancellationToken.None);
-            toDo.ShouldBeNull();
-        }
-
-        [Fact]
-        public async Task DeleteAsync_ToDoDoesNotExist_ReturnsNotFound()
+        public async Task GetByIdAsync_ToDoDoesNotExist_ReturnsNotFound()
         {
             // Act
-            var result = await _sut.DeleteAsync(_toDo.Id, CancellationToken.None);
+            var result = await _sut.GetByIdAsync(_toDo.Id, CancellationToken.None);
 
             // Assert
             result.ShouldBeOfType<NotFoundResult>();

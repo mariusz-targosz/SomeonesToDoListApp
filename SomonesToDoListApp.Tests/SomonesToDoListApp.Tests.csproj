@@ -152,6 +152,9 @@
   <ItemGroup>
     <Compile Include="Controllers\ToDoAddControllerTests.cs" />
     <Compile Include="Controllers\ToDoDeleteControllerTests.cs" />
+    <Compile Include="Controllers\ToDoGetControllerTests.cs" />
+    <Compile Include="Controllers\ToDoListControllerTests.cs" />
+    <Compile Include="Controllers\ToDoUpdateControllerTests.cs" />
     <Compile Include="Fakes\ToDoInMemoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\TestDbAsyncQueryProvider.cs" />
