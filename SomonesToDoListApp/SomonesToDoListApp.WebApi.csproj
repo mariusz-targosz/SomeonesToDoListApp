@@ -243,6 +243,7 @@
     <Compile Include="Requests\ToDoResponse.cs" />
     <Compile Include="Requests\ToDoUpdateRequest.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="Services\HttpContextCurrentUserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

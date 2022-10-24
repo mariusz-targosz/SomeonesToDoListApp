@@ -3,6 +3,7 @@ using AutoMapper;
 using SomeonesToDoListApp.DataAccessLayer.Context;
 using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using SomeonesToDoListApp.Mappers;
+using SomeonesToDoListApp.Services;
 using SomeonesToDoListApp.Services.Logging;
 using SomeonesToDoListApp.Services.Services;
 using Unity;
@@ -28,6 +29,7 @@ namespace SomeonesToDoListApp
             container.RegisterType<IToDoRepository, ToDoRepository>();
             container.RegisterType<IToDoFactory, ToDoFactory>();
             container.RegisterType<IDateTimeProvider, DateTimeProvider>();
+            container.RegisterType<ICurrentUserService, HttpContextCurrentUserService>();
 
             container.RegisterType(typeof(ILogger<>), typeof(NLogger<>));
             container.RegisterInstance(InitializeMapper());
