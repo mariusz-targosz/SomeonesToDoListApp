@@ -35,7 +35,6 @@ namespace SomeonesToDoListApp.DataAccessLayer.Repositories
 
         public async Task UpdateAsync(ToDo toDo, CancellationToken cancellationToken)
         {
-            _someonesToDoListContext.ToDos.Attach(toDo);
             await _someonesToDoListContext.SaveChangesAsync(cancellationToken);
         }
 
