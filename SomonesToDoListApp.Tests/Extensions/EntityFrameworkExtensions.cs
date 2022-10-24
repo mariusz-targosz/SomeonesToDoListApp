@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading;
 using SomeonesToDoListApp.DataAccessLayer.Context;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.Tests.Providers;
@@ -10,13 +10,11 @@ using Moq;
 
 namespace SomeonesToDoListApp.Tests.Base
 {
-    public abstract class TestBase
+    public static class EntityFrameworkExtensions
     {
-        
         public static Mock<SomeonesToDoListContext> SetupMockDbContext<T>(Mock<SomeonesToDoListContext> mockContext, IQueryable set) where T : ToDo
         {
             mockContext.Setup(s => s.ToDos.Remove(It.IsAny<T>())).Callback<T>(async (entity) => (await set.ToListAsync()).Remove(entity));
-
             return mockContext;
         }
 
@@ -27,8 +25,7 @@ namespace SomeonesToDoListApp.Tests.Base
             mockSet.As<IQueryable<T>>().Setup(s => s.Provider).Returns(queryable.Provider);
             mockSet.As<IQueryable<T>>().Setup(s => s.ElementType).Returns(queryable.ElementType);
             mockSet.As<IQueryable<T>>().Setup(s => s.Expression).Returns(queryable.Expression);
-            mockSet.Setup(s => s.Remove(It.IsAny<T>()))
-                .Callback<T>(async (entity) => (await queryable.ToListAsync()).Remove(entity));
+            mockSet.Setup(s => s.Remove(It.IsAny<T>())).Callback<T>(async (entity) => (await queryable.ToListAsync()).Remove(entity));
             return mockSet;
         }
 
@@ -41,19 +38,8 @@ namespace SomeonesToDoListApp.Tests.Base
             mockSet.As<IQueryable<T>>().Setup(s => s.ElementType).Returns(queryable.ElementType);
             mockSet.As<IQueryable<T>>().Setup(s => s.Expression).Returns(queryable.Expression);
             mockSet.As<IQueryable<T>>().Setup(s => s.GetEnumerator()).Returns((IEnumerator<T>)queryable.GetEnumerator());
-            mockSet.Setup(s => s.Remove(It.IsAny<T>()))
-                .Callback<T>(async (entity) => (await queryable.ToListAsync()).Remove(entity));
+            mockSet.Setup(s => s.Remove(It.IsAny<T>())).Callback<T>(async (entity) => (await queryable.ToListAsync()).Remove(entity));
             return mockSet;
-        }
-
-        protected static IQueryable<ToDo> GetTestData()
-        {
-            return new List<ToDo>
-            {
-                new ToDo(Guid.NewGuid(), "Get a new bike", string.Empty, DateTime.UtcNow, Guid.NewGuid()),
-                new ToDo(Guid.NewGuid(), "Feed my dog", string.Empty, DateTime.UtcNow, Guid.NewGuid()),
-                new ToDo(Guid.NewGuid(), "Do my homework", string.Empty, DateTime.UtcNow, Guid.NewGuid())
-            }.AsQueryable();
         }
     }
 }
