@@ -22,7 +22,7 @@ namespace SomeonesToDoListApp.Controllers
 
                 var toDoResponse = _mapper.Map<ToDoResponse>(toDo);
 
-                return Created($"{Routes.ToDoApi}/{toDoResponse.Id}", toDoResponse);
+                return Created($"{Routes.ToDoListApi}/{toDoResponse.Id}", toDoResponse);
             }
 
             toDo.Update(request.Title, request.Description);

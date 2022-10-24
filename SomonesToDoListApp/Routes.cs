@@ -2,6 +2,6 @@
 {
     public static class Routes
     {
-        public const string ToDoApi = "api/todos";
+        public const string ToDoListApi = "api/todos";
     }
 }
