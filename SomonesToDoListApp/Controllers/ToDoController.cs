@@ -6,6 +6,7 @@ using SomeonesToDoListApp.Services.Services;
 
 namespace SomeonesToDoListApp.Controllers
 {
+    [Authorize]
     [RoutePrefix(Routes.ToDoListApi)]
     public partial class ToDoController : ApiController
 	{
