@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Context\SomeonesToDoListContext.cs" />
     <Compile Include="Entities\ToDo.cs" />
+    <Compile Include="Models\PagedResult.cs" />
     <Compile Include="Specifications\Specification.cs" />
     <Compile Include="Repositories\ToDoRepository.cs" />
     <Compile Include="Migrations\201810061608049_CreateToDoList.cs" />
@@ -77,5 +78,6 @@
       <DependentUpon>202210231202438_UpdateToDoEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

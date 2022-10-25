@@ -4,7 +4,6 @@ using SomeonesToDoListApp.Controllers;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
-using SomeonesToDoListApp.Requests;
 using SomeonesToDoListApp.Services.Services;
 using SomeonesToDoListApp.Tests.Fakes;
 using System;
@@ -12,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Shouldly;
+using SomeonesToDoListApp.Models;
 using SomeonesToDoListApp.Services;
 using Xunit;
 

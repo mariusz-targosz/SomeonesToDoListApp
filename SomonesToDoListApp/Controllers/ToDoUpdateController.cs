@@ -4,7 +4,7 @@ using System.Threading;
 using System.Web.Http;
 using System.Net;
 using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
-using SomeonesToDoListApp.Requests;
+using SomeonesToDoListApp.Models;
 
 namespace SomeonesToDoListApp.Controllers
 {

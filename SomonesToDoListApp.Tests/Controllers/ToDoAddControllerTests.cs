@@ -9,7 +9,7 @@ using SomeonesToDoListApp.Controllers;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
-using SomeonesToDoListApp.Requests;
+using SomeonesToDoListApp.Models;
 using SomeonesToDoListApp.Services;
 using SomeonesToDoListApp.Services.Services;
 using SomeonesToDoListApp.Tests.Fakes;

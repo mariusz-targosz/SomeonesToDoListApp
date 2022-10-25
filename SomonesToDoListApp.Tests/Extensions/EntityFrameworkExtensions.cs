@@ -2,13 +2,12 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Threading;
+using Moq;
 using SomeonesToDoListApp.DataAccessLayer.Context;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.Tests.Providers;
-using Moq;
 
-namespace SomeonesToDoListApp.Tests.Base
+namespace SomeonesToDoListApp.Tests.Extensions
 {
     public static class EntityFrameworkExtensions
     {

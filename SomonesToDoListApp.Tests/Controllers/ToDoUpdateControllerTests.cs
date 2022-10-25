@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using NSubstitute;
 using SomeonesToDoListApp.Controllers;
-using SomeonesToDoListApp.Requests;
 using SomeonesToDoListApp.Services.Services;
 using SomeonesToDoListApp.Tests.Fakes;
 using System.Threading.Tasks;
@@ -14,6 +13,7 @@ using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using Xunit;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
 using SomeonesToDoListApp.DataAccessLayer.ValueObjects;
+using SomeonesToDoListApp.Models;
 using SomeonesToDoListApp.Services;
 
 namespace SomeonesToDoListApp.Tests.Controllers

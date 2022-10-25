@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Threading;
 using System.Web.Http;
-using SomeonesToDoListApp.Requests;
+using SomeonesToDoListApp.Models;
 
 namespace SomeonesToDoListApp.Controllers
 {

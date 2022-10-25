@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SomeonesToDoListApp.DataAccessLayer.Context;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
+using SomeonesToDoListApp.DataAccessLayer.Models;
 using SomeonesToDoListApp.DataAccessLayer.Specifications;
 
 namespace SomeonesToDoListApp.DataAccessLayer.Repositories
@@ -15,7 +15,7 @@ namespace SomeonesToDoListApp.DataAccessLayer.Repositories
         Task UpdateAsync(ToDo toDo, CancellationToken cancellationToken);
         Task DeleteAsync(ToDo toDo, CancellationToken cancellationToken);
         Task<ToDo> GetByIdAsync(Guid id, CancellationToken cancellationToken);
-        Task<IEnumerable<ToDo>> GetAllAsync(Specification<ToDo> specification, CancellationToken cancellationToken);
+        Task<PagedResult<ToDo>> GetAllAsync(Specification<ToDo> specification, int pageNumber, int pageSize, CancellationToken cancellationToken);
     }
 
     public class ToDoRepository : IToDoRepository
@@ -49,14 +49,25 @@ namespace SomeonesToDoListApp.DataAccessLayer.Repositories
             return _someonesToDoListContext.ToDos.FindAsync(cancellationToken, id);
         }
 
-        public async Task<IEnumerable<ToDo>> GetAllAsync(Specification<ToDo> specification, CancellationToken cancellationToken)
+        public async Task<PagedResult<ToDo>> GetAllAsync(Specification<ToDo> specification, int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 
-            return _someonesToDoListContext.ToDos
+            var query = _someonesToDoListContext.ToDos
                 .AsNoTracking()
-                .Where(specification.ToExpression())
+                .Where(specification.ToExpression());
+
+            var total = query.Count();
+            if (total == 0)
+                return new PagedResult<ToDo>(0, Enumerable.Empty<ToDo>());
+
+            var skip = (pageNumber - 1) * pageSize;
+            var result = query.OrderByDescending(x => x.CreatedAt)
+                .Skip(skip)
+                .Take(pageSize)
                 .AsEnumerable();
+
+            return new PagedResult<ToDo>(total, result);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SomeonesToDoListApp.Requests
+namespace SomeonesToDoListApp.Models
 {
     public class ToDoResponse
     {

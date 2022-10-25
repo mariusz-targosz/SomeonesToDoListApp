@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
+using SomeonesToDoListApp.DataAccessLayer.Models;
 using SomeonesToDoListApp.DataAccessLayer.Repositories;
 using SomeonesToDoListApp.DataAccessLayer.Specifications;
 
@@ -37,10 +38,18 @@ namespace SomeonesToDoListApp.Tests.Fakes
             return _data.TryGetValue(id, out var value) ? value : null;
         }
 
-        public async Task<IEnumerable<ToDo>> GetAllAsync(Specification<ToDo> specification, CancellationToken cancellationToken)
+        public async Task<PagedResult<ToDo>> GetAllAsync(Specification<ToDo> specification, int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
-            return _data.Values.Where(specification.IsSatisfiedBy);
+
+            var query = _data.Values
+                .Where(specification.IsSatisfiedBy)
+                .ToList();
+
+            var skip = (pageNumber - 1) * pageSize;
+            var result = query.Skip(skip).Take(pageSize);
+
+            return new PagedResult<ToDo>(query.Count, result);
         }
     }
 }

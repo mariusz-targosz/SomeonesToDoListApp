@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SomeonesToDoListApp.Requests
+namespace SomeonesToDoListApp.Models
 {
-    public class ToDoUpdateRequest
+    public class ToDoAddRequest
     {
         [Required]
         public string Title { get; }
 
         public string Description { get; }
 
-        public ToDoUpdateRequest(string title, string description)
+        public ToDoAddRequest(string title, string description)
         {
             Title = title;
             Description = description;

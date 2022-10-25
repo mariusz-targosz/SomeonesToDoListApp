@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SomeonesToDoListApp.DataAccessLayer.Entities;
-using SomeonesToDoListApp.Requests;
+using SomeonesToDoListApp.Models;
 
 namespace SomeonesToDoListApp.Mappers
 {

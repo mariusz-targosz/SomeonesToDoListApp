@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Moq;
 using Shouldly;
 using SomeonesToDoListApp.DataAccessLayer.Context;
-using SomeonesToDoListApp.Tests.Base;
+using SomeonesToDoListApp.Tests.Extensions;
 using Xunit;
 
 namespace SomeonesToDoListApp.Tests.Repositories

@@ -230,6 +230,8 @@
     <Compile Include="Controllers\ToDoListController.cs" />
     <Compile Include="Controllers\ToDoDeleteController.cs" />
     <Compile Include="Controllers\ToDoGetController.cs" />
+    <Compile Include="Models\ToDoListRequest.cs" />
+    <Compile Include="Models\ToDoListResponse.cs" />
     <Compile Include="Controllers\ToDoUpdateController.cs" />
     <Compile Include="Controllers\ToDoAddController.cs" />
     <Compile Include="Extensions\HttpConfigurationExtensions.cs" />
@@ -238,9 +240,9 @@
     </Compile>
     <Compile Include="Mappers\ToDoMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\ToDoAddRequest.cs" />
-    <Compile Include="Requests\ToDoResponse.cs" />
-    <Compile Include="Requests\ToDoUpdateRequest.cs" />
+    <Compile Include="Models\ToDoAddRequest.cs" />
+    <Compile Include="Models\ToDoResponse.cs" />
+    <Compile Include="Models\ToDoUpdateRequest.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Services\HttpContextCurrentUserService.cs" />
     <Compile Include="Startup.cs" />
