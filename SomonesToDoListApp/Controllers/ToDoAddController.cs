@@ -11,6 +11,9 @@ namespace SomeonesToDoListApp.Controllers
         [Route]
         public async Task<IHttpActionResult> AddAsync([FromBody] ToDoAddRequest request, CancellationToken cancellationToken)
         {
+            if (request == null)
+                return BadRequest();
+
             var toDo = _toDoFactory.Create(request.Title, request.Description, _currentUserService.UserId);
             await _toDoRepository.AddAsync(toDo, cancellationToken);
 

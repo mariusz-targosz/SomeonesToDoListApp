@@ -14,6 +14,9 @@ namespace SomeonesToDoListApp.Controllers
         [Route]
         public async Task<IHttpActionResult> ListAsync([FromUri] ToDoListRequest toDoListRequest, CancellationToken cancellationToken)
         {
+            if (toDoListRequest == null)
+                return BadRequest();
+
             var toDosCreatedByUserSpecification = new ToDosCreatedByUserSpecification(_currentUserService.UserId);
             var pagedResult = await _toDoRepository.GetAllAsync(toDosCreatedByUserSpecification, toDoListRequest.PageNumber, toDoListRequest.PageSize, cancellationToken);
             var toDoResponseCollection = _mapper.Map<IReadOnlyList<ToDoResponse>>(pagedResult.Items.ToArray());

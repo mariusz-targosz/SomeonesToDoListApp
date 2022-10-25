@@ -14,6 +14,9 @@ namespace SomeonesToDoListApp.Controllers
         [Route("{id}")]
         public async Task<IHttpActionResult> UpdateAsync([FromUri] Guid id, [FromBody] ToDoUpdateRequest request, CancellationToken cancellationToken)
         {
+            if (request == null)
+                return BadRequest();
+
             var toDo = await _toDoRepository.GetByIdAsync(id, cancellationToken);
             if (toDo == null)
             {
